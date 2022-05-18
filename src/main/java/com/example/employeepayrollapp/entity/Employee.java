@@ -1,49 +1,76 @@
 package com.example.employeepayrollapp.entity;
-        import javax.persistence.Entity;
-        import javax.persistence.GeneratedValue;
-        import javax.persistence.Id;
+import com.example.employeepayrollapp.dto.EmployeeDTO;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDate;
+
+/**
+ * Entity Class for Employee
+ *
+ * @Data - For Getters and Setters.
+ * @AllArgsConstructor - For Constructor with all arguments.
+ * @NoArgsConstructor - For Constructor with no arguments.
+ */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
-    public String fullName;
-    public String profilePic;
-    public String salary;
-    public String email;
-    public String mobileNumber;
-    public String startDate;
     /**
-     * Employee Fields: id, firstName, lastName, salary, email, mobileNumber, startDate.
+     * Id: Auto generated id by using id and Generated values Annotation.
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int id;
+    public String fullName;
+    public String profilePic;
+    public String gender;
+    public String department;
+    public int salary;
+    public String mobileNumber;
+    public LocalDate startDate;
+    public String notes;
 
-    public Employee(int id, String fullName, String profilePic, String salary, String email, String mobileNumber, String startDate) {
+    /**
+     * Constructor : Using employee object and Id
+     *
+     * @param id       - Id of employee
+     * @param employeeDTO - employeeDTO object.
+     */
+    public Employee(int id, EmployeeDTO employeeDTO) {
         this.id = id;
-        this.fullName = fullName;
-        this.profilePic = profilePic;
-        this.salary = salary;
-        this.email = email;
-        this.mobileNumber = mobileNumber;
-        this.startDate = startDate;
+        this.fullName = employeeDTO.fullName;
+        this.profilePic = employeeDTO.profilePic;
+        this.gender = employeeDTO.gender;
+        this.department = employeeDTO.department;
+        this.mobileNumber = employeeDTO.mobileNumber;
+        this.notes = employeeDTO.notes;
+        this.salary = employeeDTO.salary;
+        this.startDate = employeeDTO.startDate;
     }
 
-    public Employee(Employee employee) {
-        this.id = employee.id;
-        this.fullName = employee.fullName;
-        this.profilePic = employee.profilePic;
-        this.salary = employee.salary;
-        this.email = employee.email;
-        this.mobileNumber = employee.mobileNumber;
-        this.startDate = employee.startDate;
+    /**
+     * Constructor: Using employeeDTO
+     * @param employeeDTO - employeeDTO object.
+     */
+    public Employee(EmployeeDTO employeeDTO) {
+        this.fullName = employeeDTO.fullName;
+        this.profilePic = employeeDTO.profilePic;
+        this.gender = employeeDTO.gender;
+        this.department = employeeDTO.department;
+        this.mobileNumber = employeeDTO.mobileNumber;
+        this.notes = employeeDTO.notes;
+        this.salary = employeeDTO.salary;
+        this.startDate = employeeDTO.startDate;
     }
 
     public Employee() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" + "id=" + id + ", fullName='" + fullName + '\'' + ", profilePic='" + profilePic + '\'' + ", salary='" + salary + '\'' + ", email='" + email + '\'' + ", mobileNumber='" + mobileNumber + '\'' + ", startDate='" + startDate + '\'' + '}';
     }
 }
